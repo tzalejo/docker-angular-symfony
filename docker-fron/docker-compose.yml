@@ -1,0 +1,19 @@
+version: "3"
+services:
+  fronte:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - NODE_VERSION=${NPM_NODE_VERSION}
+        - NODE_VARIANTE=${NPM_NODE_VARIANTE}
+    container_name: fronte
+    ports:
+      - "${NPM_PORT}:${NPM_PORT_CONTAINER}"
+    volumes:
+      - ${NPM_VOLUMEN_PATH}:/app
+    user: 1000:1000
+networks:
+  symfony_app:
+    external: true
+# docker-compose exec web ng generate component xyz

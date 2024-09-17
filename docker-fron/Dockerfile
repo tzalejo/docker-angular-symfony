@@ -1,0 +1,12 @@
+ARG NODE_VERSION 
+ARG NODE_VARIANTE
+FROM node:${NODE_VERSION}-${NODE_VARIANTE}
+LABEL maintainer="tzalejo@gmail.com"
+LABEL version="1.1"
+RUN npm install -g @angular/cli && npm cache clean --force
+WORKDIR /app
+# COPY frontend/package.json frontend/package-lock.json ./
+# RUN npm install
+EXPOSE ${NPM_PORT_CONTAINER}
+COPY ${NPM_VOLUMEN_PATH} .
+CMD [ "ng", "serve","--host", "0.0.0.0" ]
